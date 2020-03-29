@@ -14,7 +14,7 @@ class PublicIngredientsTest(TestCase):
     def setUp(self):
         self.client = APIClient()
 
-    def test_ingredients_list_unauthorized(self):
+    def test_ingredients_list_unauthenticated(self):
         res = self.client.get(INGREDIENTS_URL)
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
