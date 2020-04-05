@@ -1,5 +1,5 @@
 from core.models import Tag, Ingredient, Recipe
-from recipe import serializers
+from . import serializers
 from rest_framework import authentication, permissions
 from rest_framework import viewsets, mixins
 
@@ -36,3 +36,9 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return self.queryset.filter(user=self.request.user).order_by('-id')
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return serializers.RecipeDetailSerializer
+
+        return self.serializer_class
